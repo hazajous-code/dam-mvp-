@@ -3,7 +3,7 @@ import { ROLES, getRole } from '../data/roles'
 import type { Role } from '../types'
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
-  const { role, setRole, actorName, resetData } = useApp()
+  const { role, setRole, actorName, resetData, integrationView, toggleIntegrationView } = useApp()
   const meta = getRole(role)
 
   return (
@@ -25,6 +25,17 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
+        <button
+          onClick={toggleIntegrationView}
+          className={`btn text-xs ${
+            integrationView
+              ? 'bg-indigo-500 text-white hover:bg-indigo-600'
+              : 'border border-indigo-300 bg-white text-indigo-600 hover:bg-indigo-50'
+          }`}
+          title="실제 시스템 연동 포인트 주석 표시"
+        >
+          🔌 연동 보기 {integrationView ? 'ON' : 'OFF'}
+        </button>
         <button
           onClick={() => {
             if (confirm('데모 데이터를 초기 상태로 되돌립니다. 진행할까요?')) resetData()

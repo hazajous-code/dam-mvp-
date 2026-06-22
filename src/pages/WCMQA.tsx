@@ -5,6 +5,7 @@ import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
 import Timeline from '../components/Timeline'
 import StatCard from '../components/StatCard'
+import IntegrationNote from '../components/IntegrationNote'
 import { computeWcmResult } from '../utils/qaEngine'
 import { canDo } from '../data/roles'
 import type { WcmStatus } from '../types'
@@ -44,6 +45,13 @@ export default function WCMQA() {
             {projects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
           </select>
         }
+      />
+
+      <IntegrationNote
+        className="mb-4"
+        system="AEM Pages / 헬스체크"
+        detail="체크리스트는 실제로는 AEM Pages(Edit/Live) 조회 API + 자산/이미지 헬스체크(깨짐·404)·링크 점검 + PIM↔AEM 반영값 대조로 자동 채움. 담당자 자동 지정은 워크플로우 룰"
+        api="GET /pages/{path}, HEAD /assets"
       />
 
       <div className="mb-4 grid grid-cols-2 gap-3 md:grid-cols-4">

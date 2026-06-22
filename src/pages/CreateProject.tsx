@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
+import IntegrationNote from '../components/IntegrationNote'
 import { TEMPLATES } from '../data/templates'
 import { ACCOUNT_PROFILES, getAccount } from '../data/accounts'
 import { getRole } from '../data/roles'
@@ -305,6 +306,12 @@ export default function CreateProject() {
             <button className="text-ink-400 hover:text-ink-700" onClick={() => setAutoFilled(false)}>✕</button>
           </div>
         )}
+        <IntegrationNote
+          className="mt-3"
+          system="PIM2.0 / IdP"
+          detail="계정 기본값·추천은 mock 프로필 기준. 실제로는 SSO/IdP의 사용자·조직 정보 + PIM2.0 기준정보(카테고리 LV1~4·모델·Locale) 조회로 자동 채움"
+          api="GET /pim/v2/categories, /me"
+        />
       </div>
 
       {/* Step indicator */}
@@ -483,6 +490,11 @@ export default function CreateProject() {
                 추천값 적용
               </button>
             </div>
+            <IntegrationNote
+              className="mb-3"
+              system="PIM2.0 ↔ AEM Assets"
+              detail="DAM 필수 전송 값은 실제로는 AEM Assets 메타데이터 스키마와 1:1 매핑. PIM 값은 PIM2.0에서 read, 사용자 입력값은 폼에서 수집"
+            />
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <MappingBox title="PIM에서 가져온 값" tone="sky" items={mapping.pimValues} />
               <MappingBox title="사용자가 입력한 값" tone="slate" items={mapping.userValues} />
@@ -545,6 +557,11 @@ export default function CreateProject() {
                 <StatusBadge label={`Owner: ${account.name}`} />
               </div>
             </div>
+            <IntegrationNote
+              system="AEM Assets"
+              detail="프로젝트 생성 = 실제로는 AEM Assets에 표준 폴더 트리 생성 + 메타데이터 쓰기 API 호출. 목표 이관일은 보존/삭제 스케줄러에 등록"
+              api="POST /assets/folders, PUT /metadata"
+            />
             <button className="btn-primary w-full md:w-auto" disabled={!requiredOk} onClick={handleCreate}>
               프로젝트 생성
             </button>

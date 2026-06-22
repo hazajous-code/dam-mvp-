@@ -5,6 +5,7 @@ import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
 import RuleResultTable from '../components/RuleResultTable'
 import Timeline from '../components/Timeline'
+import IntegrationNote from '../components/IntegrationNote'
 import StatCard from '../components/StatCard'
 import { runGatekeeping, computeQAResult } from '../utils/qaEngine'
 import { canDo } from '../data/roles'
@@ -58,6 +59,12 @@ export default function GatekeepingQA() {
             {projects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
           </select>
         }
+      />
+
+      <IntegrationNote
+        className="mb-4"
+        system="룰 엔진 + DAM/PIM"
+        detail="자동 검증은 실제로는 서버 룰 엔진이 AEM Assets 메타·폴더 경로와 PIM2.0 기준정보를 대조해 수행. 정상 건 자동 승인은 워크플로우 엔진이 처리하고 예외만 담당자 큐로 라우팅"
       />
 
       {/* 원칙 배너 */}

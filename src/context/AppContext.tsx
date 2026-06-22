@@ -25,6 +25,8 @@ interface AppState {
   addTimeline: (id: string, action: string, note?: string) => void
   setRules: (rules: Rule[]) => void
   toggleRule: (id: string) => void
+  integrationView: boolean
+  toggleIntegrationView: () => void
   resetData: () => void
 }
 
@@ -47,10 +49,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [rules, setRulesState] = useState<Rule[]>(() =>
     load<Rule[]>('rules', MOCK_RULES),
   )
+  const [integrationView, setIntegrationView] = useState<boolean>(() =>
+    load<boolean>('integrationView', false),
+  )
 
   useEffect(() => save('role', role), [role])
   useEffect(() => save('projects', projects), [projects])
   useEffect(() => save('rules', rules), [rules])
+  useEffect(() => save('integrationView', integrationView), [integrationView])
 
   const value = useMemo<AppState>(() => {
     const actorName = ACTOR_BY_ROLE[role]
@@ -95,6 +101,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setRulesState((prev) =>
           prev.map((r) => (r.id === id ? { ...r, enabled: !r.enabled } : r)),
         ),
+      integrationView,
+      toggleIntegrationView: () => setIntegrationView((v) => !v),
       resetData: () => {
         clearAll()
         setProjects(SEED_PROJECTS)
@@ -102,7 +110,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setRole('HQ_PMO')
       },
     }
-  }, [role, projects, rules])
+  }, [role, projects, rules, integrationView])
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
+import IntegrationNote from '../components/IntegrationNote'
 import { canDo } from '../data/roles'
 import { validateFileNaming } from '../utils/qaEngine'
 import type { Asset, AssetType, Project } from '../types'
@@ -145,6 +146,13 @@ export default function AssetUpload() {
           현재 역할에서는 업로드 권한이 없습니다. <b>Agency</b> 역할로 전환하면 업로드를 시연할 수 있습니다. (조회는 가능)
         </div>
       )}
+
+      <IntegrationNote
+        className="mb-4"
+        system="AEM Assets / 룰 엔진"
+        detail="실제 업로드는 AEM Assets 바이너리 업로드 API. 파일명·확장자·중복·Alt Text·Locale 검증은 서버 룰 엔진이 수행하고, 하위 폴더 추천은 Asset Type 매핑 규칙 기반"
+        api="POST /assets/{path}"
+      />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* 업로드 영역 */}

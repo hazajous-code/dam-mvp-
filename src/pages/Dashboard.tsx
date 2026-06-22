@@ -19,6 +19,7 @@ import { useApp } from '../context/AppContext'
 import { PageHeader } from '../components/Layout'
 import StatCard from '../components/StatCard'
 import StatusBadge from '../components/StatusBadge'
+import IntegrationNote from '../components/IntegrationNote'
 import { BU_COLORS, pct } from '../utils/format'
 import type { BU, Channel } from '../types'
 
@@ -92,6 +93,12 @@ export default function Dashboard() {
       <PageHeader
         title="Dashboard"
         description="글로벌 DAM 운영 현황을 한눈에 확인합니다."
+      />
+
+      <IntegrationNote
+        className="mb-4"
+        system="집계"
+        detail="현재 KPI·차트는 mock 기준. 실제로는 DAM(AEM Assets)·WCM(AEM Pages)·PIM2.0·GP1 Admin의 상태/이력 API를 배치 집계하거나 데이터웨어하우스에서 조회"
       />
 
       {/* 상단 KPI 카드 */}

@@ -4,6 +4,7 @@ import { useApp } from '../context/AppContext'
 import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
 import Timeline from '../components/Timeline'
+import IntegrationNote from '../components/IntegrationNote'
 import { runGatekeeping, computeQAResult, canTransfer } from '../utils/qaEngine'
 import { canDo } from '../data/roles'
 import { pct } from '../utils/format'
@@ -72,6 +73,13 @@ export default function TransferApproval() {
           </ul>
         </div>
       )}
+
+      <IntegrationNote
+        className="mb-4"
+        system="AEM Assets / GP1 / 채널"
+        detail="이관 완료 처리는 실제로는 AEM Assets 이관 API + 채널 배포(GP1 Admin·Contents Hub) 연계. 최종 승인은 워크플로우, 이력은 감사 로그에 적재되어 JIRA 커뮤니케이션을 대체"
+        api="POST /assets/transfer"
+      />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="space-y-4 lg:col-span-2">

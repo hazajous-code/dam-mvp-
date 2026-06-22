@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useApp } from '../context/AppContext'
 import { PageHeader } from '../components/Layout'
 import StatusBadge from '../components/StatusBadge'
+import IntegrationNote from '../components/IntegrationNote'
 import { canDo } from '../data/roles'
 import type { RuleCategory } from '../types'
 
@@ -33,6 +34,12 @@ export default function RuleSettings() {
       <PageHeader
         title="Rule Settings"
         description="게이트키핑 자동화 룰을 카테고리별로 관리합니다. Severity와 Automation Level에 따라 자동 승인/검토/차단이 결정됩니다."
+      />
+
+      <IntegrationNote
+        className="mb-4"
+        system="룰 스토어"
+        detail="룰은 실제로는 서버 룰 스토어(DB)에 저장되고, 변경 시 감사 이력이 남음. Gatekeeping/WCM QA 엔진이 이 룰을 런타임에 로드해 평가"
       />
 
       {!canManage && (

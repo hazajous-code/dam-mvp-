@@ -59,6 +59,8 @@ npm run preview  # 빌드 결과 미리보기
 | **Analytics** | 자동 승인율/예외율/누락률/처리시간/수작업 절감 + 운영 인사이트 |
 | **Rule Settings** | 7개 카테고리 자동화 룰 관리(Severity/Automation Level/Enabled 토글) |
 
+> 헤더의 **🔌 연동 보기** 토글을 켜면 각 화면에 "실제로는 어떤 시스템/API로 대체되는지" 연동 포인트 주석이 표시됩니다. 개발사 평가용 체크리스트는 [docs/vendor-assessment.md](docs/vendor-assessment.md) 참고.
+
 ---
 
 ## 4. 역할별 사용 흐름
