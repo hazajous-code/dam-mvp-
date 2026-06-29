@@ -16,7 +16,7 @@ const QA_RESULTS: QAResult[] = [
 ]
 
 export default function ProjectManagement() {
-  const { projects } = useApp()
+  const { visibleProjects: projects, role, buScope } = useApp()
   const nav = useNavigate()
 
   const [q, setQ] = useState('')
@@ -63,7 +63,10 @@ export default function ProjectManagement() {
     <div>
       <PageHeader
         title="Project Management"
-        description={`총 ${filtered.length}건 / 전체 ${projects.length}건`}
+        description={
+          (role === 'BU_OWNER' ? `${buScope} BU · ` : '전체 BU · ') +
+          `총 ${filtered.length}건 / ${projects.length}건`
+        }
         actions={
           <button className="btn-primary" onClick={() => nav('/create')}>
             ＋ 프로젝트 생성

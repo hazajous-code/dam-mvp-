@@ -31,7 +31,7 @@ export const ROLES: RoleMeta[] = [
   {
     id: 'BU_OWNER',
     name: 'BU Owner',
-    description: '본부별 프로젝트 확인, 필수 정보 검토 및 승인',
+    description: '담당 BU의 프로젝트만 조회·검토·승인 (담당 BU 한정 관리자)',
     allowedMenus: [
       'dashboard',
       'projects',

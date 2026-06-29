@@ -10,7 +10,7 @@ import { pct } from '../utils/format'
 import type { BU, Channel } from '../types'
 
 export default function Analytics() {
-  const { projects } = useApp()
+  const { visibleProjects: projects } = useApp()
 
   const data = useMemo(() => {
     const total = projects.length

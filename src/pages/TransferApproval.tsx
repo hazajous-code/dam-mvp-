@@ -21,13 +21,16 @@ function Row({ label, value }: { label: string; value: React.ReactNode }) {
 export default function TransferApproval() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { projects, getProject, updateProject, addTimeline, role } = useApp()
-  const project = getProject(id ?? projects[0]?.id ?? '')
+  const { visibleProjects, getProject, updateProject, addTimeline, role, canViewProject } = useApp()
+  const project = getProject(id ?? visibleProjects[0]?.id ?? '')
   const [comment, setComment] = useState('')
   const canFinal = canDo(role, 'final_approve') || canDo(role, 'transfer')
 
   if (!project) {
     return <div className="card p-8 text-center text-slate-500">프로젝트가 없습니다.</div>
+  }
+  if (!canViewProject(project)) {
+    return <div className="card p-8 text-center text-slate-500">담당 BU가 아닌 프로젝트입니다. 상단에서 담당 BU를 변경하세요.</div>
   }
 
   const gkResult = computeQAResult(runGatekeeping(project))
@@ -51,7 +54,7 @@ export default function TransferApproval() {
         description="Gatekeeping과 WCM QA 결과를 종합해 DAM 이관 준비 상태를 확인하고 최종 승인합니다."
         actions={
           <select className="input max-w-xs" value={project.id} onChange={(e) => nav(`/transfer/${e.target.value}`)}>
-            {projects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
+            {visibleProjects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
           </select>
         }
       />

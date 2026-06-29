@@ -6,7 +6,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
-import type { Project, Role, TimelineEvent, Rule } from '../types'
+import type { Project, Role, TimelineEvent, Rule, BU } from '../types'
 import { SEED_PROJECTS } from '../data/mockProjects'
 import { MOCK_RULES } from '../data/mockRules'
 import { load, save, clearAll } from '../utils/storage'
@@ -27,6 +27,12 @@ interface AppState {
   toggleRule: (id: string) => void
   integrationView: boolean
   toggleIntegrationView: () => void
+  /** BU Owner가 담당하는 BU (BU_OWNER 역할에서만 의미) */
+  buScope: BU
+  setBuScope: (bu: BU) => void
+  /** 현재 역할 기준으로 볼 수 있는 프로젝트 (BU Owner는 담당 BU만) */
+  visibleProjects: Project[]
+  canViewProject: (p: Project) => boolean
   resetData: () => void
 }
 
@@ -52,11 +58,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [integrationView, setIntegrationView] = useState<boolean>(() =>
     load<boolean>('integrationView', false),
   )
+  const [buScope, setBuScope] = useState<BU>(() => load<BU>('buScope', 'MS'))
 
   useEffect(() => save('role', role), [role])
   useEffect(() => save('projects', projects), [projects])
   useEffect(() => save('rules', rules), [rules])
   useEffect(() => save('integrationView', integrationView), [integrationView])
+  useEffect(() => save('buScope', buScope), [buScope])
 
   const value = useMemo<AppState>(() => {
     const actorName = ACTOR_BY_ROLE[role]
@@ -103,6 +111,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
         ),
       integrationView,
       toggleIntegrationView: () => setIntegrationView((v) => !v),
+      buScope,
+      setBuScope,
+      visibleProjects:
+        role === 'BU_OWNER' ? projects.filter((p) => p.bu === buScope) : projects,
+      canViewProject: (p: Project) => role !== 'BU_OWNER' || p.bu === buScope,
       resetData: () => {
         clearAll()
         setProjects(SEED_PROJECTS)
@@ -110,7 +123,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setRole('HQ_PMO')
       },
     }
-  }, [role, projects, rules, integrationView])
+  }, [role, projects, rules, integrationView, buScope])
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>
 }

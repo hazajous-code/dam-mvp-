@@ -18,13 +18,23 @@ function Field({ label, value }: { label: string; value: React.ReactNode }) {
 export default function ProjectDetail() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { getProject } = useApp()
+  const { getProject, canViewProject } = useApp()
   const project = id ? getProject(id) : undefined
 
   if (!project) {
     return (
       <div className="card p-10 text-center text-slate-500">
         프로젝트를 찾을 수 없습니다.
+        <div className="mt-3">
+          <button className="btn-secondary" onClick={() => nav('/projects')}>목록으로</button>
+        </div>
+      </div>
+    )
+  }
+  if (!canViewProject(project)) {
+    return (
+      <div className="card p-10 text-center text-slate-500">
+        담당 BU가 아닌 프로젝트입니다. 상단에서 담당 BU를 변경하거나 HQ PMO로 전환하세요.
         <div className="mt-3">
           <button className="btn-secondary" onClick={() => nav('/projects')}>목록으로</button>
         </div>

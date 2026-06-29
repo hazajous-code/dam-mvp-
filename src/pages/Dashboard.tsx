@@ -26,7 +26,7 @@ import type { BU, Channel } from '../types'
 const STATUS_COLORS = ['#94a3b8', '#38bdf8', '#818cf8', '#f59e0b', '#fb923c', '#a78bfa', '#34d399', '#059669', '#f43f5e']
 
 export default function Dashboard() {
-  const { projects } = useApp()
+  const { visibleProjects: projects, role, buScope } = useApp()
   const nav = useNavigate()
 
   const stats = useMemo(() => {
@@ -92,7 +92,11 @@ export default function Dashboard() {
     <div>
       <PageHeader
         title="Dashboard"
-        description="글로벌 DAM 운영 현황을 한눈에 확인합니다."
+        description={
+          role === 'BU_OWNER'
+            ? `${buScope} BU 담당 현황 (담당 BU 프로젝트만 표시)`
+            : '글로벌 DAM 운영 현황을 한눈에 확인합니다. (전체 BU)'
+        }
       />
 
       <IntegrationNote

@@ -13,8 +13,8 @@ import type { WcmStatus } from '../types'
 export default function WCMQA() {
   const { id } = useParams()
   const nav = useNavigate()
-  const { projects, getProject, updateProject, addTimeline, role } = useApp()
-  const project = getProject(id ?? projects[0]?.id ?? '')
+  const { visibleProjects, getProject, updateProject, addTimeline, role, canViewProject } = useApp()
+  const project = getProject(id ?? visibleProjects[0]?.id ?? '')
   const [comment, setComment] = useState('')
 
   const canRequest = canDo(role, 'create_project') || canDo(role, 'review_metadata')
@@ -22,6 +22,9 @@ export default function WCMQA() {
 
   if (!project) {
     return <div className="card p-8 text-center text-slate-500">프로젝트가 없습니다.</div>
+  }
+  if (!canViewProject(project)) {
+    return <div className="card p-8 text-center text-slate-500">담당 BU가 아닌 프로젝트입니다. 상단에서 담당 BU를 변경하세요.</div>
   }
 
   const wcm = computeWcmResult(project)
@@ -42,7 +45,7 @@ export default function WCMQA() {
         description="WCM(AEM) 제작물의 QA를 요청하고 CNX QA가 승인/반려합니다."
         actions={
           <select className="input max-w-xs" value={project.id} onChange={(e) => nav(`/wcm/${e.target.value}`)}>
-            {projects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
+            {visibleProjects.map((p) => <option key={p.id} value={p.id}>{p.id} · {p.name}</option>)}
           </select>
         }
       />

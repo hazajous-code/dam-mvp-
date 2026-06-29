@@ -3,7 +3,7 @@ import { ROLES, getRole } from '../data/roles'
 import type { Role } from '../types'
 
 export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
-  const { role, setRole, actorName, resetData, integrationView, toggleIntegrationView } = useApp()
+  const { role, setRole, actorName, resetData, integrationView, toggleIntegrationView, buScope, setBuScope } = useApp()
   const meta = getRole(role)
 
   return (
@@ -49,8 +49,28 @@ export default function Header({ onMenuClick }: { onMenuClick?: () => void }) {
         <div className="flex items-center gap-2">
           <div className="hidden text-right md:block">
             <p className="text-xs font-semibold text-slate-700">{actorName}</p>
-            <p className="text-[10px] text-slate-400">{meta.name}</p>
+            <p className="text-[10px] text-slate-400">
+              {meta.name}
+              {role === 'BU_OWNER' && ` · ${buScope} BU 담당`}
+            </p>
           </div>
+
+          {role === 'BU_OWNER' && (
+            <label className="relative">
+              <span className="sr-only">담당 BU</span>
+              <select
+                value={buScope}
+                onChange={(e) => setBuScope(e.target.value as typeof buScope)}
+                className="cursor-pointer rounded-lg border border-sky-300 bg-sky-50 py-2 pl-3 pr-7 text-sm font-medium text-sky-700 outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
+                title="담당 BU (이 BU의 프로젝트만 표시)"
+              >
+                <option value="MS">MS 담당</option>
+                <option value="HS">HS 담당</option>
+                <option value="ES">ES 담당</option>
+              </select>
+            </label>
+          )}
+
           <label className="relative">
             <span className="sr-only">역할 전환</span>
             <select
