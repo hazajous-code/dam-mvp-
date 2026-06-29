@@ -1,6 +1,6 @@
 # DAM 고도화 MVP — 글로벌 Asset Operations 콘솔
 
-LG전자 글로벌 **DAM(Digital Asset Management) 운영 고도화** 방향을 설명하기 위한 데모형 프로토타입입니다.
+글로벌 **DAM(Digital Asset Management) 운영 고도화** 방향을 설명하기 위한 데모형 프로토타입입니다.
 PIM2.0 기준정보를 기반으로 DAM 프로젝트를 생성하고, 필수 메타데이터·폴더 구조·파일명 규칙·QA 상태를 한 곳에서 관리하며,
 게이트키핑 자동화 → WCM QA → DAM 이관까지 하나의 워크플로우로 연결하는 구조를 시각화합니다.
 
