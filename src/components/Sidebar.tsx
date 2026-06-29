@@ -14,6 +14,7 @@ const MENU: MenuItem[] = [
   { key: 'dashboard', to: '/', label: 'Dashboard', icon: '▦', group: '운영 현황' },
   { key: 'projects', to: '/projects', label: 'Project Management', icon: '▤', group: '운영 현황' },
   { key: 'analytics', to: '/analytics', label: 'Analytics', icon: '◳', group: '운영 현황' },
+  { key: 'journey', to: '/journey', label: '운영 여정 (Journey)', icon: '◧', group: '운영 현황' },
   { key: 'create', to: '/create', label: 'Create Project', icon: '＋', group: '프로젝트' },
   { key: 'template', to: '/template', label: 'Template & Metadata', icon: '▣', group: '프로젝트' },
   { key: 'upload', to: '/upload', label: 'Asset Upload', icon: '⤓', group: '제작 / 검수' },

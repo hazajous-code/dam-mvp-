@@ -35,6 +35,7 @@ export const ROLES: RoleMeta[] = [
     allowedMenus: [
       'dashboard',
       'projects',
+      'journey',
       'template',
       'gatekeeping',
       'transfer',
@@ -46,7 +47,7 @@ export const ROLES: RoleMeta[] = [
     id: 'AGENCY',
     name: 'Agency',
     description: '자산 업로드, 누락 항목 확인 및 수정 제출',
-    allowedMenus: ['dashboard', 'projects', 'upload', 'gatekeeping'],
+    allowedMenus: ['dashboard', 'projects', 'journey', 'upload', 'gatekeeping'],
     actions: ['upload_asset', 'resubmit'],
   },
   {
@@ -56,6 +57,7 @@ export const ROLES: RoleMeta[] = [
     allowedMenus: [
       'dashboard',
       'projects',
+      'journey',
       'gatekeeping',
       'transfer',
       'analytics',
@@ -67,7 +69,7 @@ export const ROLES: RoleMeta[] = [
     id: 'CNX_QA',
     name: 'CNX QA',
     description: 'WCM 제작물 QA 승인 / 반려',
-    allowedMenus: ['dashboard', 'projects', 'wcm', 'gatekeeping'],
+    allowedMenus: ['dashboard', 'projects', 'journey', 'wcm', 'gatekeeping'],
     actions: ['wcm_approve', 'wcm_reject'],
   },
   {

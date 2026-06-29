@@ -14,6 +14,7 @@ import WCMQA from './pages/WCMQA'
 import TransferApproval from './pages/TransferApproval'
 import Analytics from './pages/Analytics'
 import RuleSettings from './pages/RuleSettings'
+import CustomerJourney from './pages/CustomerJourney'
 
 // 메뉴 접근 권한이 없을 때 안내
 function NoAccess() {
@@ -54,6 +55,7 @@ export default function App() {
         <Route path="/wcm/:id" element={<Guard menu="wcm"><WCMQA /></Guard>} />
         <Route path="/transfer" element={<Guard menu="transfer"><TransferApproval /></Guard>} />
         <Route path="/transfer/:id" element={<Guard menu="transfer"><TransferApproval /></Guard>} />
+        <Route path="/journey" element={<Guard menu="journey"><CustomerJourney /></Guard>} />
         <Route path="/analytics" element={<Guard menu="analytics"><Analytics /></Guard>} />
         <Route path="/rules" element={<Guard menu="rules"><RuleSettings /></Guard>} />
         <Route path="*" element={<Navigate to="/" replace />} />

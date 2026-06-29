@@ -57,6 +57,7 @@ npm run preview  # 빌드 결과 미리보기
 | **WCM QA** | AEM 제작물 QA 체크리스트, QA 요청→검토→승인/반려, DAM 이관 가능 여부 |
 | **Transfer & Approval** | Gatekeeping+WCM QA 종합, Transfer Ready/Blocked, 최종 승인·이관 처리 |
 | **Analytics** | 자동 승인율/예외율/누락률/처리시간/수작업 절감 + 운영 인사이트 |
+| **운영 여정 (Journey)** | 단계(가로)×역할 레인(세로) 스윔레인 다이어그램. 단계↔상태 매핑·예외 루프·연결 시스템 각주, 카드 클릭 시 해당 화면 이동 |
 | **Rule Settings** | 7개 카테고리 자동화 룰 관리(Severity/Automation Level/Enabled 토글) |
 
 > 헤더의 **🔌 연동 보기** 토글을 켜면 각 화면에 "실제로는 어떤 시스템/API로 대체되는지" 연동 포인트 주석이 표시됩니다. 개발사 평가용 체크리스트는 [docs/vendor-assessment.md](docs/vendor-assessment.md) 참고.
